@@ -6,22 +6,28 @@ This branch holds a throwaway prototype. It is not production code and should ne
 
 What should receiving beauty on Splendor feel like?
 
-## The three variants
+## The design: Chapel, evolved
 
-All three run the whole flow: home, choosing a Pack and a Session length, the Moment screen, moving between Moments, and the Session ending (fade to dark, a soft chime, one line to carry with you).
+Lincoln picked Chapel from round 1. The three round-1 variants (Gallery, Chapel, Book) are in commit `33abfc8` on this branch if you want them back.
 
-- **A · Gallery** — a museum. The painting fills the screen, the Passage sits on a placard in the corner, Credits are small and exact. Home is a quiet wall of Pack covers. A Moment with no Image becomes wall text.
-- **B · Chapel** — candlelit and dark. The Image is dimmed and drifts slowly, the Passage is revealed line by line in large serif. Entering asks "How long do you have?" and then "Enter".
-- **C · Book** — an illuminated book. The Image is a framed plate, the Passage is set like a printed page with a drop cap, and Moments turn like pages. Packs are a table of contents.
+- **Home** shows Today's Moment: its Image softly visible, the Pack name, and one Begin button. "How long do you have?" is a light choice (just play, five, ten or fifteen minutes). "All Packs" opens the Library. "Best with sound on" has a small speaker button that plays a few seconds of today's Sound.
+- **Reveal**: the Image is dimmed and drifts slowly, and the Passage appears line by line in large serif, centred.
+- **Rest**: a few seconds after the last line, the Passage and its Credits move in one continuous motion into a small block in the bottom-left corner, and the Image comes up to full brightness with no dark overlay. Only a soft local shadow sits behind the corner text, darker or lighter depending on how bright that corner of the painting is. The Image keeps drifting.
+- **Sound player** in the bottom-right corner: title and credit, play or pause, next, mute, a thin progress line with elapsed and remaining time, and small level bars while it plays. A Moment with no Sound says "Silence".
+- **A Moment with no Image** uses the candlelit Backdrop and keeps the Passage centred.
+- **Closing**: the last seconds fade to dark, the Sound fades out, a soft chime plays, and a quiet "Return" takes you home.
 
-## How to switch
+## Sound
 
-- Add `?variant=A`, `?variant=B` or `?variant=C` to the URL.
-- Or use the black bar at the bottom centre: the arrows, or the left and right arrow keys.
-- Add `&fast=1` to make every Moment 15 seconds and Sessions short, for testing the ending.
+Each Moment's Sound is `{ title, credit, audio?, youtube? }`. When `audio` is set (a public-domain recording on Wikimedia Commons), the page plays it directly and uses YouTube only as a fallback. Modern pieces (Pärt, Richter) and pieces with no good public-domain recording stay on YouTube. The YouTube player is created hidden when the page loads, so the Begin tap can start it straight away. If a browser still refuses to start a YouTube Sound, the small video appears in the corner with "This browser needs one tap on the video to play its Sound".
+
+## Testing tricks
+
+- Add `?fast=1` to make every Moment short, so you can reach the ending quickly.
+- The yellow "PROTOTYPE" pill marks it as a prototype.
 
 ## Run it
 
-Open `index.html` through any web server (GitHub Pages serves it from this branch), for example `python3 -m http.server` and visit http://localhost:8000/?variant=B. Sound comes from YouTube, so it needs a connection and one tap to start.
+GitHub Pages serves this branch at https://grow-that-pro.github.io/splendor/. Locally, run `python3 -m http.server` in this folder and open http://localhost:8000/.
 
 All data lives in the `PACKS` constant at the top of `index.html`.
