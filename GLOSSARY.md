@@ -7,7 +7,7 @@ Terms marked (proposed) wait on Lincoln's yes.
 ## The aim
 
 **The transcendentals**:
-The true, the good and the beautiful. What Splendor exists to give; not a feature.
+The true, the good and the beautiful. What Splendor exists to give; not a feature. The good is left implied: a Moment that moves someone is enough for them to act on.
 _Avoid_: content, wellness, productivity, self-care
 
 ## A Moment and its parts
@@ -27,10 +27,6 @@ _Avoid_: background, artwork, wallpaper
 **Passage**:
 The words shown in a Moment: scripture, a saint, a writer, a post.
 _Avoid_: quote, quotation, overlay, text
-
-**Invitation** (proposed):
-One small good thing to do, offered by a Moment: pray for someone, thank someone, step outside. How the good enters, beside the true and the beautiful.
-_Avoid_: task, action, challenge, habit
 
 **Backdrop**:
 The plain screen shown when a Moment has no Image.
@@ -56,32 +52,44 @@ A Pack someone else made and shared.
 The person who chose the Moments in a Pack. Not the author of a Passage.
 _Avoid_: author, creator, maker
 
-**Cover** (proposed):
+**Cover**:
 The Image that stands for a Pack where Packs are listed.
 _Avoid_: thumbnail, artwork
 
-**Library** (proposed):
+**Library**:
 Every Pack you can choose from, starter and community.
 _Avoid_: marketplace, store, catalogue
 
 ## Receiving
 
+**Today's Moment**:
+The one Moment waiting when you open Splendor, before any choice.
+_Avoid_: daily quote, featured, home card
+
+**Reveal** (proposed):
+The first part of a Moment: the Image dimmed while the Passage appears line by line in the centre.
+_Avoid_: intro, animation
+
+**Rest** (proposed):
+The second part of a Moment: the Passage moves to the bottom-left corner and the Image comes up to full brightness.
+_Avoid_: idle, settled state, minimised
+
+**Sound player** (proposed):
+The small player in the bottom-right corner that shows what is playing.
+_Avoid_: audio player, controls, now playing
+
 **Session**:
 A timed run through Moments from one Pack: 5, 10 or 15 minutes. "10 Minutes of Beauty" is a Session.
 _Avoid_: break, block, sprint, workout
 
-**Threshold** (proposed):
+**Threshold**:
 The quiet first screen of a Session, before the first Moment.
 _Avoid_: onboarding, intro, loading
 
-**Closing** (proposed):
-The end of a Session: the screen fades to dark and a soft chime sounds.
+**Closing**:
+The end of a Session: the screen fades to dark, the Sound fades out and a soft chime sounds. Nothing is handed to you to carry out.
 _Avoid_: outro, end screen, summary
 
-**Keepsake** (proposed):
-The one line or Invitation you carry out of a Session, shown at its Closing.
-_Avoid_: takeaway, summary, lesson
-
-**Kept** (proposed):
+**Kept**:
 Moments you've saved to return to, held in your browser.
 _Avoid_: favourites, likes, bookmarks, collection
