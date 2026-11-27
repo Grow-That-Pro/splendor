@@ -20,7 +20,7 @@ Lincoln picked Chapel from round 1. The three round-1 variants (Gallery, Chapel,
 
 ## Sound
 
-Each Moment's Sound is `{ title, credit, youtube, spotify? }`, and the page plays it through YouTube. The YouTube player is created hidden when the page loads, so the Begin tap can start it straight away. If a browser still refuses (strict autoplay settings, likely iPhone Safari), the small video appears in the corner with "This browser needs one tap on the video to play its Sound".
+Each Moment's Sound is `{ title, credit, youtube, spotify? }`, and the page plays it through YouTube. The YouTube player is created hidden when the page loads, so the Begin tap can start it straight away. It stays muted until the piece itself plays, because YouTube sometimes shows an ad first on the live site; the ad then runs silently. If a browser still refuses (strict autoplay settings, likely iPhone Safari), the small video appears in the corner with "This browser needs one tap on the video to play its Sound".
 
 ## Testing tricks
 
