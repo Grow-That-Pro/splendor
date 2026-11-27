@@ -83,14 +83,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .soundcheck button:hover{border-color:rgba(255,210,150,.8);background:rgba(255,190,110,.08)}
 
 /* library + threshold */
-.lib{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5vh;padding:40px 24px 60px;text-align:center;overflow-y:auto}
-.glow{position:absolute;left:50%;top:22%;width:120vmax;height:120vmax;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,170,80,.11) 0%,rgba(255,140,60,.04) 22%,transparent 50%);pointer-events:none;animation:breathe 7s ease-in-out infinite}
-.lib .invite{font-style:italic;font-weight:300;font-size:clamp(22px,2.4vw,30px);color:#bfb19a}
-.packs{display:flex;flex-direction:column;gap:3.2vh}
-.pack{display:block;transition:color 1.2s,text-shadow 1.2s;color:#cdbfa8}
-.pack .n{display:block;font-weight:300;font-size:clamp(38px,5vw,62px);line-height:1}
-.pack .c{display:block;font-family:'Cormorant SC',serif;font-size:13px;letter-spacing:.3em;color:#7d7262;margin-top:8px}
-.pack:hover{color:#fff3dc;text-shadow:0 0 30px rgba(255,180,90,.45)}
+.lib{position:absolute;inset:0;overflow-y:auto;padding:calc(84px + env(safe-area-inset-top)) clamp(16px,5vw,72px) 72px}
+.lib h2{font-family:'Cormorant SC',serif;font-weight:500;font-size:15px;letter-spacing:.55em;padding-left:.55em;color:#d9c7a6;text-align:center;margin:0 0 clamp(28px,5vh,52px)}
+.covers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,300px));justify-content:center;gap:clamp(14px,2.4vw,32px);max-width:1180px;margin:0 auto}
+.cover{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border-radius:2px;background:#15100b;text-align:left;box-shadow:0 18px 50px rgba(0,0,0,.55);opacity:0;animation:fadeIn 1.6s ease forwards}
+.cover .ci{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.8);transition:transform 6s ease,filter 1.2s}
+.cover:after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.88) 0%,rgba(8,6,4,.35) 34%,rgba(8,6,4,0) 58%)}
+.cover .cn{position:absolute;left:22px;right:22px;bottom:46px;z-index:1;font-weight:300;font-size:clamp(34px,3.2vw,46px);line-height:1;color:#f4ead8}
+.cover .cc{position:absolute;left:22px;right:22px;bottom:22px;z-index:1;font-family:'Cormorant SC',serif;font-size:12px;letter-spacing:.3em;color:#cdbfa8}
+.cover:hover .ci,.cover:focus-visible .ci{transform:scale(1.04);filter:brightness(1)}
+.packmark{position:absolute;left:0;right:0;top:calc(13vh + env(safe-area-inset-top));text-align:center;z-index:5;opacity:0;transform:translateY(6px);transition:opacity 2s ease,transform 2s ease;pointer-events:none;text-shadow:0 0 2px rgba(0,0,0,.5),0 0 18px rgba(0,0,0,.6)}
+.packmark.on{opacity:1;transform:none}
+.packmark .pn{font-style:italic;font-weight:300;font-size:clamp(26px,2.6vw,34px);color:#efe2c8}
+.packmark .pc{font-size:11px;letter-spacing:.3em;color:#cfb98f;margin-top:6px}
+@media (max-width:700px){.covers{grid-template-columns:1fr 1fr;justify-content:stretch;gap:12px}.cover .cn{font-size:26px;left:14px;right:14px;bottom:34px}.cover .cc{left:14px;right:8px;bottom:14px;font-size:9.5px;letter-spacing:.12em;white-space:nowrap}}
 .back{position:absolute;top:calc(22px + env(safe-area-inset-top));left:24px;font-family:'Cormorant SC',serif;letter-spacing:.3em;font-size:12px;color:#8a7e6c;z-index:5}
 .back:hover{color:#efe6d6}
 .thresh{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:34px;padding:24px 24px 60px}
@@ -101,7 +107,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 /* Moment: passage, reveal and rest */
 .pz{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10vh 5vw 20vh;pointer-events:none;z-index:4}
 .pz .lines{font-weight:400;font-size:var(--cf,44px);line-height:1.28;color:#f7eee0;text-shadow:0 2px 30px rgba(0,0,0,.6)}
-.pz .ln{display:block;width:max-content;margin:0 auto;white-space:nowrap;opacity:0;filter:blur(8px);transform:translateY(10px);transition:opacity 2.6s ease,filter 2.6s ease,transform 2.6s ease;transform-origin:0 0}
+.pz .ln{display:block;width:max-content;margin:0 auto;white-space:nowrap;opacity:0;filter:blur(8px);transform:translateY(10px);transition:opacity 2.1s ease,filter 2.1s ease,transform 2.1s ease;transform-origin:0 0}
 .pz .ln.on{opacity:1;filter:blur(0);transform:none}
 .pz .who,.pz .art{width:max-content;max-width:90vw;margin:0 auto;transform-origin:0 0;opacity:0;transition:opacity 2.4s}
 .pz .who{margin-top:4.5vh;font-family:'Cormorant SC',serif;letter-spacing:.3em;font-size:14px;color:#cfb98f}
@@ -176,7 +182,6 @@ svg.ic{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3;str
 <body>
 <div id="app"></div>
 <div id="yt-wrap"><div id="yt"></div></div><div id="yt-ask">This browser needs one tap on the video to play its Sound</div>
-<audio id="snd" preload="auto" playsinline></audio>
 <div id="proto"></div>
 <script>
 /* ===================== DATA: shaped like a real pack file ===================== */
@@ -185,10 +190,12 @@ const PACKS = [
     id: "advent",
     name: "Advent",
     curator: "Splendor",
+    added: "2026-11-22",
+    tags: ["sacred", "advent", "waiting", "chant"],
     description: "Waiting in the dark for the light that is coming. For the four weeks from Sunday 29 November.",
     moments: [
       {
-        sound: { title: "O Come, O Come, Emmanuel", credit: "United States Air Force Band of the Pacific Northwest", audio: "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/19/O_Come%2C_O_Come_Emmanuel_-_United_States_Air_Force_Band_of_the_Pacific_Northwest.opus/O_Come%2C_O_Come_Emmanuel_-_United_States_Air_Force_Band_of_the_Pacific_Northwest.opus.mp3", youtube: "https://www.youtube.com/watch?v=z2OcqXQT9_o" },
+        sound: { title: "O Come, O Come, Emmanuel", credit: "St. Martin's Chamber Choir", youtube: "https://www.youtube.com/watch?v=z2OcqXQT9_o" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Gerard_van_Honthorst_-_Adoration_of_the_Shepherds_%281622%29.jpg/1920px-Gerard_van_Honthorst_-_Adoration_of_the_Shepherds_%281622%29.jpg", title: "Adoration of the Shepherds, 1622", credit: "Gerard van Honthorst" },
         passage: { text: "The people that walked in darkness\nhave seen a great light:\nthey that dwell in the land\nof the shadow of death,\nupon them hath the light shined.", credit: "Isaiah 9:2", source: "King James Version" }
       },
@@ -203,7 +210,7 @@ const PACKS = [
         passage: { text: "O Dayspring,\nsplendour of light eternal\nand sun of righteousness:\ncome and enlighten those who sit in darkness\nand in the shadow of death.", credit: "O Antiphon for 21 December", source: "Traditional English" }
       },
       {
-        sound: { title: "Rorate caeli", credit: "Gregorian chant, Introit for the Fourth Sunday of Advent", audio: "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/4f/Rorate.ogg/Rorate.ogg.mp3", youtube: "https://www.youtube.com/watch?v=6VdF6xsMxhk" },
+        sound: { title: "Rorate caeli", credit: "Gregorian chant for Advent, sung by Harpa Dei", youtube: "https://www.youtube.com/watch?v=6VdF6xsMxhk" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Geertgen_tot_Sint_Jans%2C_The_Nativity_at_Night%2C_c_1490.jpg/1920px-Geertgen_tot_Sint_Jans%2C_The_Nativity_at_Night%2C_c_1490.jpg", title: "The Nativity at Night, c. 1490", credit: "Geertgen tot Sint Jans" },
         passage: { text: "Arise, shine;\nfor thy light is come,\nand the glory of the Lord\nis risen upon thee.", credit: "Isaiah 60:1", source: "King James Version" }
       }
@@ -213,6 +220,8 @@ const PACKS = [
     id: "saints",
     name: "Saints",
     curator: "Splendor",
+    added: "2026-11-08",
+    tags: ["sacred", "saints", "contemplative"],
     description: "Men and women who were set on fire, in their own words.",
     moments: [
       {
@@ -221,7 +230,7 @@ const PACKS = [
         passage: { text: "Late have I loved you,\nbeauty so ancient and so new,\nlate have I loved you.", credit: "Saint Augustine", source: "Confessions, Book X" }
       },
       {
-        sound: { title: "Air, from Orchestral Suite No. 3", credit: "J. S. Bach, played by the Air Force Strings, United States Air Force Band", audio: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Air_-_Air_Force_Strings_-_United_States_Air_Force_Band.mp3", youtube: "https://www.youtube.com/watch?v=su0MMGllWy0" },
+        sound: { title: "Air, from Orchestral Suite No. 3", credit: "J. S. Bach, Concentus Musicus Wien, conducted by Nikolaus Harnoncourt", youtube: "https://www.youtube.com/watch?v=su0MMGllWy0" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg/1920px-Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg", title: "The Milkmaid, c. 1658", credit: "Johannes Vermeer" },
         passage: { text: "Let nothing disturb thee,\nNothing affright thee;\nAll things are passing;\nGod never changeth;\nPatient endurance\nAttaineth to all things;\nWho God possesseth\nIn nothing is wanting;\nAlone God sufficeth.", credit: "Saint Teresa of Ávila", source: "Her bookmark, translated by Henry Wadsworth Longfellow" }
       },
@@ -231,7 +240,7 @@ const PACKS = [
         passage: { text: "O Jesus, my Love,\nat last I have found my vocation:\nmy vocation is love!", credit: "Saint Thérèse of Lisieux", source: "Story of a Soul" }
       },
       {
-        sound: { title: "Cello Suite No. 1, Prélude", credit: "J. S. Bach, played by Pablo Casals", audio: "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9d/Bach_-_Cello_Suite_no._1_in_G_major%2C_BWV_1007_-_I._Pr%C3%A9lude.ogg/Bach_-_Cello_Suite_no._1_in_G_major%2C_BWV_1007_-_I._Pr%C3%A9lude.ogg.mp3", youtube: "https://www.youtube.com/watch?v=1prweT95Mo0" },
+        sound: { title: "Cello Suite No. 1, Prélude", credit: "J. S. Bach, played by Yo-Yo Ma", youtube: "https://www.youtube.com/watch?v=1prweT95Mo0" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Rembrandt_Harmensz._van_Rijn_-_The_Return_of_the_Prodigal_Son.jpg/1920px-Rembrandt_Harmensz._van_Rijn_-_The_Return_of_the_Prodigal_Son.jpg", title: "The Return of the Prodigal Son, c. 1669", credit: "Rembrandt van Rijn" },
         passage: { text: "Nothing is so strong as gentleness;\nnothing so gentle\nas real strength.", credit: "Saint Francis de Sales", source: "Attributed" }
       }
@@ -241,10 +250,12 @@ const PACKS = [
     id: "builders",
     name: "Builders",
     curator: "Lincoln",
+    added: "2026-10-25",
+    tags: ["work", "discipline", "contemplative"],
     description: "For people who make things. Patience, discipline and the long view.",
     moments: [
       {
-        sound: { title: "Gymnopédie No. 1", credit: "Erik Satie, played by Robin Alciatore", audio: "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/90/Erik_Satie_-_gymnopedies_-_la_1_ere._lent_et_douloureux.ogg/Erik_Satie_-_gymnopedies_-_la_1_ere._lent_et_douloureux.ogg.mp3", youtube: "https://www.youtube.com/watch?v=eMnxjdGTK4w" },
+        sound: { title: "Gymnopédie No. 1", credit: "Erik Satie", youtube: "https://www.youtube.com/watch?v=eMnxjdGTK4w" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/3/33/Joseph_Mallord_William_Turner_-_Norham_Castle%2C_Sunrise_-_WGA23182.jpg", title: "Norham Castle, Sunrise, c. 1845", credit: "J. M. W. Turner" },
         passage: { text: "In the morning when thou risest unwillingly,\nlet this thought be present:\nI am rising to the work\nof a human being.", credit: "Marcus Aurelius", source: "Meditations V.1, translated by George Long" }
       },
@@ -270,7 +281,6 @@ const Q = new URLSearchParams(location.search);
 const FAST = Q.get('fast') === '1';
 const EST_SOUND = FAST ? 15 : 210, EST_SILENT = FAST ? 15 : 60, FADE = FAST ? 6 : 30, MORPH = 1800;
 const app = document.getElementById('app');
-const audio = document.getElementById('snd');
 const now = () => performance.now() / 1000;
 const ytId = u => u && ((u.match(/[?&]v=([\w-]{11})/) || u.match(/youtu\.be\/([\w-]{11})/) || [])[1]);
 const fmt = s => { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
@@ -308,24 +318,24 @@ function tone(node, lum, on) {
   node.style.setProperty('--pa', !on ? .3 : ink ? .5 : lum < .2 ? .32 : .58);
 }
 
-/* Today's Moment: in Advent season it comes from the Advent pack, otherwise it rotates through every Moment with an Image and a Sound */
+const P = id => PACKS.find(p => p.id === id);
+const newest = () => PACKS.reduce((a, b) => (b.added > a.added ? b : a));
+/* Today's Moment comes from the newest Pack, rotating daily through its Moments that have an Image and a Sound */
 function today() {
-  const d = new Date(), day = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5);
-  const m = d.getMonth(), dt = d.getDate();
-  const inAdvent = (m === 10 && dt >= 22) || (m === 11 && dt <= 24);
-  const pool = [];
-  PACKS.forEach(p => p.moments.forEach((mo, i) => { if (mo.image && mo.sound && (!inAdvent || p.id === 'advent') && (!inAdvent || mo.sound.audio)) pool.push({ packId: p.id, index: i }); }));
-  return pool[day % pool.length];
+  const d = new Date(), day = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5), p = newest();
+  const pool = p.moments.map((mo, i) => i).filter(i => p.moments[i].image && p.moments[i].sound);
+  return { packId: p.id, index: pool[day % pool.length] };
 }
 const TODAY = today();
 
 let S = { screen: 'home', packId: null, minutes: 0, plan: [], pos: 0, momentStart: 0, momentLen: 0, deadline: Infinity, paused: false, pausedAt: 0, ending: false, endAt: 0, muted: false, sound: '', kind: null };
 let M = null; /* the live Moment: phase, timings, elements */
-const pack = () => PACKS.find(p => p.id === S.packId);
-const cur = () => pack().moments[S.plan[S.pos]];
+const pack = () => P(S.packId);
+const item = k => S.plan[k === undefined ? S.pos : k];
+const cur = () => P(item().p).moments[item().i];
 const elapsed = () => (S.paused ? S.pausedAt : now()) - S.momentStart;
 
-/* ---------- Sound: <audio> first, YouTube for the rest ---------- */
+/* ---------- Sound: YouTube ---------- */
 let YTP = null, ytReady = false, ytPending = null, volTimer = null, AC = null, previewTimer = null;
 window.onYouTubeIframeAPIReady = () => {
   YTP = new YT.Player('yt', {
@@ -356,21 +366,11 @@ function ytAsk() {
   document.getElementById('yt-wrap').classList.toggle('ask', need);
   document.getElementById('yt-ask').classList.toggle('on', need);
 }
-audio.addEventListener('playing', () => { if (S.kind === 'audio') S.sound = 'playing'; });
-audio.addEventListener('waiting', () => { if (S.kind === 'audio') S.sound = 'loading'; });
-audio.addEventListener('pause', () => { if (S.kind === 'audio' && S.sound === 'playing') S.sound = 'paused'; });
-audio.addEventListener('ended', () => { if (S.kind !== 'audio') return; S.sound = 'ended'; if (S.screen === 'moment' && !FAST && !S.ending && S.pos < S.plan.length - 1) next(); });
-audio.addEventListener('error', () => {
-  if (S.kind !== 'audio' || !audio.getAttribute('src')) return;
-  const s = S.screen === 'moment' && cur().sound;
-  if (s && s.youtube) { S.kind = 'youtube'; ytLoad(ytId(s.youtube)); }
-  else { S.sound = 'unavailable'; if (S.screen === 'moment') S.momentLen = elapsed() + EST_SILENT; }
-});
 function fadeTo(to, ms, done) {
   clearInterval(volTimer);
-  const kind = S.kind, t0 = performance.now();
-  const get = () => kind === 'audio' ? audio.volume : (ytReady ? YTP.getVolume() / 100 : 1);
-  const set = v => { try { if (kind === 'audio') audio.volume = Math.max(0, Math.min(1, v)); else if (ytReady) YTP.setVolume(Math.round(v * 100)); } catch (_) {} };
+  const t0 = performance.now();
+  const get = () => ytReady ? YTP.getVolume() / 100 : 1;
+  const set = v => { try { if (ytReady) YTP.setVolume(Math.round(Math.max(0, Math.min(1, v)) * 100)); } catch (_) {} };
   const from = get();
   if (!ms) { set(to); done && done(); return; }
   volTimer = setInterval(() => {
@@ -378,34 +378,23 @@ function fadeTo(to, ms, done) {
     if (k >= 1) { clearInterval(volTimer); done && done(); }
   }, 50);
 }
-/* Must be callable synchronously inside a tap: audio.play() and loadVideoById run before any await or timer. */
+/* Must be callable synchronously inside a tap: loadVideoById runs before any await or timer. */
 function startSound(s, start) {
   clearTimeout(previewTimer);
-  if (!s) { stopAll(); S.kind = null; S.sound = 'silence'; return; }
-  if (s.audio) {
-    try { YTP && ytReady && YTP.stopVideo(); } catch (_) {}
-    S.kind = 'audio'; S.sound = 'loading';
-    if (audio.getAttribute('src') !== s.audio) { audio.src = s.audio; if (start) audio.currentTime = start; }
-    audio.muted = S.muted; audio.volume = 0;
-    const p = audio.play(); if (p && p.catch) p.catch(e => { S.sound = e && e.name === 'NotAllowedError' ? 'blocked' : 'unavailable'; });
-    fadeTo(1, 2200);
-  } else if (s.youtube) {
-    audio.pause();
-    S.kind = 'youtube'; S.sound = 'loading';
-    ytLoad(ytId(s.youtube), start);
-  }
+  if (!s || !s.youtube) { stopAll(); S.kind = null; S.sound = 'silence'; return; }
+  S.kind = 'youtube'; S.sound = 'loading';
+  ytLoad(ytId(s.youtube), start);
 }
 function stopAll(ms = 0, then) {
   clearTimeout(previewTimer);
-  const end = () => { audio.pause(); try { YTP && ytReady && YTP.pauseVideo(); } catch (_) {} then && then(); };
+  const end = () => { try { YTP && ytReady && YTP.pauseVideo(); } catch (_) {} then && then(); };
   if (ms && S.kind) fadeTo(0, ms, end); else end();
 }
 function soundTimes() {
-  if (S.kind === 'audio' && audio.duration && isFinite(audio.duration)) return [audio.currentTime, audio.duration];
   if (S.kind === 'youtube' && ytReady && YTP.getDuration && YTP.getDuration() > 0) return [YTP.getCurrentTime(), YTP.getDuration()];
   return null;
 }
-function setMuted(m) { S.muted = m; audio.muted = m; try { if (ytReady) m ? YTP.mute() : YTP.unMute(); } catch (_) {} }
+function setMuted(m) { S.muted = m; try { if (ytReady) m ? YTP.mute() : YTP.unMute(); } catch (_) {} }
 function unlockAudio() {
   try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); AC.resume(); } catch (_) {}
 }
@@ -434,21 +423,36 @@ function begin(packId, startIndex, minutes) {
   unlockAudio();
   S.packId = packId;
   const ms = pack().moments, order = ms.map((_, i) => (startIndex + i) % ms.length);
+  S.played = [packId];
   const total = minutes ? minutes * 60 * (FAST ? EST_SOUND / 210 : 1) : Infinity;
   let t = 0; const plan = [];
-  for (const i of order) { if (t >= total) break; plan.push(i); t += FAST ? 15 : (ms[i].sound ? EST_SOUND : EST_SILENT); }
+  for (const i of order) { if (t >= total) break; plan.push({ p: packId, i }); t += FAST ? 15 : (ms[i].sound ? EST_SOUND : EST_SILENT); }
   Object.assign(S, { minutes, plan, pos: 0, screen: 'moment', ending: false, paused: false, deadline: minutes ? now() + total : Infinity });
   document.body.classList.remove('paused');
   startSound(cur().sound);
   startMoment(true);
 }
+/* In Just play, when the plan reaches its last Moment, add the unplayed Pack sharing the most tags (newest first on a tie) */
+function carryOn() {
+  if (S.minutes || S.pos < S.plan.length - 1) return;
+  const tags = pack().tags || [];
+  const nextPack = PACKS.filter(p => !S.played.includes(p.id))
+    .map(p => [p, (p.tags || []).filter(t => tags.includes(t)).length])
+    .sort((a, b) => b[1] - a[1] || (b[0].added > a[0].added ? 1 : -1))[0];
+  if (!nextPack) return;
+  S.played.push(nextPack[0].id);
+  nextPack[0].moments.forEach((_, i) => S.plan.push({ p: nextPack[0].id, i }));
+}
 function startMoment(first) {
+  const changed = !first && item(S.pos - 1).p !== item().p;
+  S.packId = item().p;
+  carryOn();
   const m = cur();
   S.momentStart = now(); S.momentLen = m.sound ? EST_SOUND : EST_SILENT;
   if (!first) { if (m.sound) stopAll(1300, () => startSound(m.sound)); else stopAll(1800, () => startSound(null)); }
   else if (!m.sound) startSound(null);
-  const nx = pack().moments[S.plan[S.pos + 1]]; if (nx) imageOk(nx.image);
-  if (first) render(); else Moment.show(m, false);
+  const nx = item(S.pos + 1); if (nx) imageOk(P(nx.p).moments[nx.i].image);
+  if (first) render(); else Moment.show(m, false, changed);
 }
 function next() {
   if (S.screen !== 'moment' || S.ending) return;
@@ -457,10 +461,10 @@ function next() {
 function togglePause() {
   if (S.screen !== 'moment' || S.ending) return;
   S.paused = !S.paused;
-  if (S.paused) { S.pausedAt = now(); audio.pause(); try { ytReady && YTP.pauseVideo(); } catch (_) {} }
+  if (S.paused) { S.pausedAt = now(); try { ytReady && YTP.pauseVideo(); } catch (_) {} }
   else {
     const dt = now() - S.pausedAt; S.momentStart += dt; S.deadline += dt;
-    if (S.kind === 'audio') audio.play().catch(() => {}); else if (S.kind === 'youtube') try { YTP.playVideo(); } catch (_) {}
+    if (S.kind === 'youtube') try { YTP.playVideo(); } catch (_) {}
   }
   document.body.classList.toggle('paused', S.paused);
 }
@@ -520,7 +524,7 @@ function Home() {
   btn.onclick = () => {
     unlockAudio();
     if (S.kind && S.sound === 'playing') { stopAll(600); btn.innerHTML = IC.on; label.textContent = 'Best with sound on'; return; }
-    startSound(m.sound, m.sound.audio ? 0 : 20);
+    startSound(m.sound, 20);
     btn.innerHTML = '<span class="bars on"><i></i><i></i><i></i><i></i></span>';
     label.textContent = m.sound.title;
     previewTimer = setTimeout(() => fadeTo(0, 1500, () => { stopAll(); btn.innerHTML = IC.on; label.textContent = 'Best with sound on'; }), 6000);
@@ -528,12 +532,16 @@ function Home() {
   app.appendChild(s);
 }
 function Library() {
-  const s = el('<div class="screen fade-in"><button class="back">Back</button><div class="lib"><div class="glow"></div>' + candle + '<div class="sc" style="font-size:15px;color:#d9c7a6;letter-spacing:.55em;padding-left:.55em">All Packs</div><div class="invite">Come in. Be still.</div><nav class="packs"></nav></div></div>');
-  PACKS.forEach(p => {
-    const b = el('<button class="pack"><span class="n"></span><span class="c"></span></button>');
-    b.querySelector('.n').textContent = p.name; b.querySelector('.c').textContent = 'kept by ' + p.curator;
+  const s = el('<div class="screen fade-in"><button class="back">Back</button><div class="lib"><h2>All Packs</h2><nav class="covers"></nav></div></div>');
+  [...PACKS].sort((a, b) => (b.added > a.added ? 1 : -1)).forEach((p, k) => {
+    const b = el('<button class="cover"><div class="ci"></div><span class="cn"></span><span class="cc"></span></button>');
+    const img = (p.moments.find(mo => mo.image) || {}).image;
+    if (img) imageOk(img).then(ok => { if (ok) b.querySelector('.ci').style.backgroundImage = 'url("' + img.url + '")'; });
+    b.style.animationDelay = (k * .18) + 's';
+    b.setAttribute('aria-label', p.name + ', gathered by ' + p.curator);
+    b.querySelector('.cn').textContent = p.name; b.querySelector('.cc').textContent = 'gathered by ' + p.curator;
     b.onclick = () => openPack(p.id);
-    s.querySelector('.packs').appendChild(b);
+    s.querySelector('.covers').appendChild(b);
   });
   s.querySelector('.back').onclick = goHome;
   app.appendChild(s);
@@ -569,13 +577,22 @@ const Moment = {
     wake();
     Moment.show(cur(), true);
   },
-  show(m, fresh) {
+  show(m, fresh, changed) {
     const s = app.querySelector('.stage'); if (!s) return;
     s.classList.remove('rest');
     s.querySelectorAll('.pz').forEach(o => { o.classList.add('gone'); setTimeout(() => o.remove(), 1500); });
     s.querySelectorAll('.plate').forEach(o => { o.classList.remove('on'); setTimeout(() => o.remove(), 1700); });
     const roman = ['i', 'ii', 'iii', 'iv', 'v', 'vi'];
-    s.querySelector('.where').textContent = pack().name + ' · ' + (roman[S.pos] || S.pos + 1) + ' of ' + (roman[S.plan.length - 1] || S.plan.length);
+    const seg = S.plan.filter(x => x.p === S.packId), k = seg.indexOf(item());
+    s.querySelector('.where').textContent = pack().name + ' · ' + (roman[k] || k + 1) + ' of ' + (roman[seg.length - 1] || seg.length);
+    s.querySelectorAll('.packmark').forEach(o => o.remove());
+    if (changed) {
+      const pm = el('<div class="packmark"><div class="pn"></div><div class="pc sc"></div></div>');
+      pm.querySelector('.pn').textContent = pack().name; pm.querySelector('.pc').textContent = 'gathered by ' + pack().curator;
+      s.insertBefore(pm, s.querySelector('.top'));
+      raf2(() => pm.classList.add('on'));
+      setTimeout(() => { pm.classList.remove('on'); setTimeout(() => pm.remove(), 2200); }, FAST ? 3500 : 5500);
+    }
     const sp = s.querySelector('.sp');
     tone(sp, 0, false);
     sp.classList.toggle('silent', !m.sound);
@@ -604,11 +621,11 @@ const Moment = {
       s.insertBefore(pz, s.querySelector('.top'));
       live.pz = pz;
       Moment.fit(pz, lines.length);
-      const gap = FAST ? 1.1 : (lines.length > 6 ? 2.6 : 3.4), start = elapsed() + (fresh ? 1.6 : 2.6);
+      const gap = FAST ? 1.1 : (lines.length > 6 ? 2.1 : 2.7), start = elapsed() + (fresh ? 1.4 : (changed ? 3 : 2.2));
       live.lineAt = lines.map((_, i) => start + i * gap);
       live.whoAt = start + (lines.length - 1) * gap + gap * .8;
       const lastAt = start + (lines.length - 1) * gap;
-      live.restAt = ok ? lastAt + (FAST ? Math.max(2.5, lines.length * 0.8) : Math.max(6, 4 * lines.length)) : Infinity;
+      live.restAt = ok ? lastAt + (FAST ? Math.max(2.5, lines.length * 0.8) : Math.max(4, 2 * lines.length)) : Infinity;
     });
   },
   fit(pz, n) {
