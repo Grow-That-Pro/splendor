@@ -195,7 +195,7 @@ const PACKS = [
     description: "Waiting in the dark for the light that is coming. For the four weeks from Sunday 29 November.",
     moments: [
       {
-        sound: { title: "O Come, O Come, Emmanuel", credit: "St. Martin's Chamber Choir", youtube: "https://www.youtube.com/watch?v=z2OcqXQT9_o" },
+        sound: { title: "O Come, O Come, Emmanuel", credit: "The Choir of King's College, Cambridge", youtube: "https://www.youtube.com/watch?v=DGnEggd0OKY" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Gerard_van_Honthorst_-_Adoration_of_the_Shepherds_%281622%29.jpg/1920px-Gerard_van_Honthorst_-_Adoration_of_the_Shepherds_%281622%29.jpg", title: "Adoration of the Shepherds, 1622", credit: "Gerard van Honthorst" },
         passage: { text: "The people that walked in darkness\nhave seen a great light:\nthey that dwell in the land\nof the shadow of death,\nupon them hath the light shined.", credit: "Isaiah 9:2", source: "King James Version" }
       },
@@ -225,7 +225,7 @@ const PACKS = [
     description: "Men and women who were set on fire, in their own words.",
     moments: [
       {
-        sound: { title: "Miserere mei, Deus", credit: "Allegri, sung by Tenebrae, conducted by Nigel Short", youtube: "https://www.youtube.com/watch?v=H3v9unphfi0" },
+        sound: { title: "Miserere mei, Deus", credit: "Allegri, sung by Tenebrae, live", youtube: "https://www.youtube.com/watch?v=PQmZnXfIUOQ" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Calling_of_Saint_Matthew-Caravaggo_%281599-1600%29.jpg/1920px-The_Calling_of_Saint_Matthew-Caravaggo_%281599-1600%29.jpg", title: "The Calling of Saint Matthew, 1600", credit: "Caravaggio" },
         passage: { text: "Late have I loved you,\nbeauty so ancient and so new,\nlate have I loved you.", credit: "Saint Augustine", source: "Confessions, Book X" }
       },
@@ -235,7 +235,7 @@ const PACKS = [
         passage: { text: "Let nothing disturb thee,\nNothing affright thee;\nAll things are passing;\nGod never changeth;\nPatient endurance\nAttaineth to all things;\nWho God possesseth\nIn nothing is wanting;\nAlone God sufficeth.", credit: "Saint Teresa of Ávila", source: "Her bookmark, translated by Henry Wadsworth Longfellow" }
       },
       {
-        sound: { title: "O virtus Sapientiae", credit: "Hildegard of Bingen, sung by Anna-Maria Hefele", youtube: "https://www.youtube.com/watch?v=4lb06zcCOd8" },
+        sound: { title: "O virtus Sapientiae", credit: "Hildegard of Bingen, sung by the Danish National Vocal Ensemble", youtube: "https://www.youtube.com/watch?v=D2aNFgqszeM" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Caspar_David_Friedrich_-_Mondaufgang_%C3%BCber_dem_Meer.jpg/1920px-Caspar_David_Friedrich_-_Mondaufgang_%C3%BCber_dem_Meer.jpg", title: "Moonrise over the Sea, 1822", credit: "Caspar David Friedrich" },
         passage: { text: "O Jesus, my Love,\nat last I have found my vocation:\nmy vocation is love!", credit: "Saint Thérèse of Lisieux", source: "Story of a Soul" }
       },
@@ -255,7 +255,7 @@ const PACKS = [
     description: "For people who make things. Patience, discipline and the long view.",
     moments: [
       {
-        sound: { title: "Gymnopédie No. 1", credit: "Erik Satie", youtube: "https://www.youtube.com/watch?v=eMnxjdGTK4w" },
+        sound: { title: "Gymnopédie No. 1", credit: "Erik Satie, played by Khatia Buniatishvili", youtube: "https://www.youtube.com/watch?v=TL0xzp4zzBE" },
         image: { url: "https://upload.wikimedia.org/wikipedia/commons/3/33/Joseph_Mallord_William_Turner_-_Norham_Castle%2C_Sunrise_-_WGA23182.jpg", title: "Norham Castle, Sunrise, c. 1845", credit: "J. M. W. Turner" },
         passage: { text: "In the morning when thou risest unwillingly,\nlet this thought be present:\nI am rising to the work\nof a human being.", credit: "Marcus Aurelius", source: "Meditations V.1, translated by George Long" }
       },
@@ -345,7 +345,7 @@ window.onYouTubeIframeAPIReady = () => {
       onReady: () => { ytReady = true; if (ytPending) { const p = ytPending; ytPending = null; ytLoad(p.id, p.start); } },
       onStateChange: e => {
         if (S.kind !== 'youtube') return;
-        if (e.data === 1) S.sound = 'playing';
+        if (e.data === 1) { S.sound = 'playing'; if (!S.muted && YTP.isMuted()) { YTP.setVolume(0); YTP.unMute(); fadeTo(1, 1800); } }
         else if (e.data === 3) S.sound = 'loading';
         else if (e.data === 2 && S.sound !== 'unavailable') S.sound = 'paused';
         else if (e.data === 0) { S.sound = 'ended'; if (S.screen === 'moment' && !FAST && !S.ending && S.pos < S.plan.length - 1) next(); }
@@ -356,7 +356,8 @@ window.onYouTubeIframeAPIReady = () => {
 };
 function ytLoad(id, start) {
   if (!ytReady) { ytPending = { id, start }; return; }
-  YTP.setVolume(S.muted ? 0 : 100); if (S.muted) YTP.mute(); else YTP.unMute();
+  /* stay muted until the piece itself plays, so a YouTube ad before it stays silent */
+  YTP.mute();
   YTP.loadVideoById({ videoId: id, startSeconds: start || 0 });
   S.ytLoadedAt = now();
 }
@@ -394,7 +395,7 @@ function soundTimes() {
   if (S.kind === 'youtube' && ytReady && YTP.getDuration && YTP.getDuration() > 0) return [YTP.getCurrentTime(), YTP.getDuration()];
   return null;
 }
-function setMuted(m) { S.muted = m; try { if (ytReady) m ? YTP.mute() : YTP.unMute(); } catch (_) {} }
+function setMuted(m) { S.muted = m; try { if (ytReady) m ? YTP.mute() : YTP.getPlayerState() === 1 && YTP.unMute(); } catch (_) {} }
 function unlockAudio() {
   try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); AC.resume(); } catch (_) {}
 }
