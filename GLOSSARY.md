@@ -2,8 +2,6 @@
 
 A site where anyone can receive the true, the good and the beautiful, one Moment at a time. The name comes from the old idea that beauty is the splendor of truth.
 
-Terms marked (proposed) wait on Lincoln's yes.
-
 ## The aim
 
 **The transcendentals**:
@@ -66,15 +64,15 @@ _Avoid_: marketplace, store, catalogue
 The one Moment waiting when you open Splendor, before any choice.
 _Avoid_: daily quote, featured, home card
 
-**Reveal** (proposed):
+**Reveal**:
 The first part of a Moment: the Image dimmed while the Passage appears line by line in the centre.
 _Avoid_: intro, animation
 
-**Rest** (proposed):
+**Rest**:
 The second part of a Moment: the Passage moves to the bottom-left corner and the Image comes up to full brightness.
 _Avoid_: idle, settled state, minimised
 
-**Sound player** (proposed):
+**Sound player**:
 The small player in the bottom-right corner that shows what is playing.
 _Avoid_: audio player, controls, now playing
 
@@ -90,6 +88,3 @@ _Avoid_: onboarding, intro, loading
 The end of a Session: the screen fades to dark, the Sound fades out and a soft chime sounds. Nothing is handed to you to carry out.
 _Avoid_: outro, end screen, summary
 
-**Kept**:
-Moments you've saved to return to, held in your browser.
-_Avoid_: favourites, likes, bookmarks, collection
